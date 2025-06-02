@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pengumuman Kelulusan SDN KEPER</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #74ebd5, #9face6);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .input-nis {
+      margin-top: 20px;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      width: 80%;
+      max-width: 300px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .result {
+      margin-top: 30px;
+      display: none;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .svg-confetti {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Pengumuman Kelulusan</h1>
+    <p>SDN KEPER - Tahun Ajaran 2024/2025</p>
+
+    <div class="input-nis">
+      <input type="text" id="nisInput" placeholder="Masukkan NIS" />
+      <br>
+      <button onclick="checkNIS()">Lihat Hasil</button>
+    </div>
+
+    <div class="result" id="resultContainer">
+      <h2 id="studentName"></h2>
+      <p id="message">SELAMAT ANANDA LULUS</p>
+    </div>
+
+    <!-- SVG confetti animation -->
+    <svg class="svg-confetti" id="confettiSVG">
+      <circle cx="50" cy="50" r="5" fill="gold" />
+      <!-- bisa dikembangkan dengan elemen konfet dinamis -->
+    </svg>
+  </div>
+
+  <script>
+    const data = {
+      "1573": "AHMAD REZA FIRDAUS",
+      "1574": "ALFAN SETYA SYAHPUTRA",
+      "1575": "ANGGELINA AMELIA PUTRI",
+      "1576": "ANGGUN SETYAWATI",
+      "1577": "DHANES BUYUNG WARDANA",
+      "1578": "DIVA MEYSILKA NAUZYLA",
+      "1579": "DWI ALFIYAH DAMAYANTI",
+      "1580": "EVAN ATHALAH RIZQULLOH",
+      "1581": "JAMIL AKBAR JAVIER",
+      "1582": "KARINA BILQIS ARIANDINI",
+      "1583": "KEVIN EFRIANSYA",
+      "1584": "LUCKY INDRA FABRIZIO",
+      "1586": "MOCH. DARREL MAHARDIKA PRATAMA",
+      "1651": "MUHAMMAD ALFARIZ MAULANA ARSYAD",
+      "1587": "MUHAMMAD ANUGRAH DITYA PRATAMA",
+      "1588": "MUHAMMAD FAIZUL ANWAR",
+      "1589": "MUHAMMAD FARHAN RAMADHANI",
+      "1590": "MUHAMMAD NAZRIL SUBIYANTO",
+      "1591": "MYSHA ZAHRA EDELWEIS",
+      "1592": "NAJWA APRILIA PUTRI",
+      "1593": "PRATAMA SUBIANTORO",
+      "1594": "REDHITA RAHMADANI PUTRI",
+      "1595": "THALITA AURELIA HADI PUTRI",
+      "1596": "VIENEZIA CAHYA AWANI"
+    };
+
+    function checkNIS() {
+      const nis = document.getElementById("nisInput").value.trim();
+      const result = document.getElementById("resultContainer");
+      const name = document.getElementById("studentName");
+
+      if (data[nis]) {
+        name.textContent = data[nis];
+        result.style.display = "block";
+        triggerConfetti();
+      } else {
+        name.textContent = "NIS tidak ditemukan.";
+        result.style.display = "block";
+      }
+    }
+
+    function triggerConfetti() {
+      const confetti = document.getElementById("confettiSVG");
+      confetti.innerHTML = '';
+      for (let i = 0; i < 50; i++) {
+        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttribute("cx", Math.random() * 500);
+        circle.setAttribute("cy", Math.random() * 300);
+        circle.setAttribute("r", Math.random() * 6 + 2);
+        circle.setAttribute("fill", `hsl(${Math.random() * 360}, 100%, 60%)`);
+        confetti.appendChild(circle);
+      }
+    }
+  </script>
+</body>
+</html>
